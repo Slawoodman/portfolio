@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row justify-content-center my-3">
+  <div class="col-5">
+    <img src="{% static 'resoures/SquareBlonde.png' %}" class="img-fluid" style="margin-left: 50px;">
+  </div>
+</div>
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-9 text-center">
+    <h1 id="hometext" class="font-weight-bold">Hey, i'm Grechaniy Viacheslav and this is my portfolio web-site😊</h1>
+  </div>
+</div>
+
+<h2 class="mt-5">Projects</h2>
+<hr>
+<div class="row">
+  {% for project in projects %}
+  <div class="col-lg-4 col-md-6">
+
+    {% if project.url %}
+    <a href="{{ project.url }}">
+      <img src="{{ project.image.url }}" class="img-fluid mb-2">
+    </a>
+    {% else %}
+
+    <a href="{% url 'curr-project' pk=project.id %}"><img src="{{ project.image.url }}" class="img-fluid mb-2"></a>
+    {% endif %}
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description|safe|slice:"150"}}</p>
+
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
